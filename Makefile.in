@@ -1,0 +1,23 @@
+CXX = @CXX@
+CXXFLAGS = @CXXFLAGS@
+PREFIX = @PREFIX@
+BINDIR = $(PREFIX)/bin
+
+TARGET = dedup
+SRC = dedup.cpp
+
+all: $(TARGET)
+
+$(TARGET): $(SRC)
+	$(CXX) $(CXXFLAGS) -o $@ $<
+
+install: $(TARGET)
+	install -D -m 755 $< $(DESTDIR)$(BINDIR)/$(TARGET)
+
+uninstall:
+	rm -f $(DESTDIR)$(BINDIR)/$(TARGET)
+
+clean:
+	rm -f $(TARGET)
+
+.PHONY: all install uninstall clean
